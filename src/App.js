@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Notfound from './Pages/Notfound/Notfound';
 import Singup from './Pages/Singup/Singup';
+import Footer from './SheredPage/Footer/Footer';
 import Nav from './SheredPage/Navigation/Nav';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" element = {<About/>}/>
         <Route path="*" element = {<Notfound/>}/>
       </Routes>
+      <Footer/>
     </div>
   );
 }

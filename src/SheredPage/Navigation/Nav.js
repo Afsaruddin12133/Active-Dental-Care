@@ -23,8 +23,7 @@ const Nav = () => {
             <NavLink to = "/registration" style={activestyle}>Sing Up</NavLink>
             <NavLink to = "/login" style={activestyle}>Login</NavLink>
             <NavLink to = "/blog" style={activestyle}>Blogs</NavLink>
-            <NavLink to = "/about" style={activestyle}>About</NavLink>
-            <NavLink to = "/about" style={activestyle}>Actra</NavLink>
+            <NavLink to = "/about" style={activestyle}>About Me</NavLink>
            </div>
            <MenuIcon className="h-14 mt-4 mr-3 w-14 md:hidden text-white"/>
         </nav>
