@@ -13,7 +13,7 @@ const Nav = () => {
     };
   };
     return (
-        <nav className='md:flex bg-[#03045E] md:justify-between md:px-8 flex'>
+        <nav className='md:flex  bg-[#03045E] md:justify-between md:px-8 flex'>
            <div>
              <img src={img} alt="" className='cursor-pointer' />
            </div>
