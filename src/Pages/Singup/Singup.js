@@ -167,6 +167,9 @@ const Singup = () => {
             duration-150
             ease-in-out">Sign up</button>
         </form>
+        <p className="text-gray-800 mt-6 text-center">Already User? <button  onClick={()=>navigate("/login")} 
+              className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Log In</button>
+          </p>
       </div>
     );
 };
