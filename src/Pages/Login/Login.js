@@ -12,9 +12,14 @@ const Login = () => {
   const [email,setEmail] = useState()
   const [password,setPassword] = useState()
   const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-  console.log(loading)
+  let errorElemrnt;
+  if(error){
+    errorElemrnt = <p> {error.message} </p>
+  }
 
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+ 
+ 
   const handelresetpassword = async () =>{
     await sendPasswordResetEmail(email);
     toast("Send Email")
@@ -60,6 +65,7 @@ const Login = () => {
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputPassword2"
               placeholder="Password" required />
           </div>
+          {errorElemrnt}
           <SocialMedia/>
           <ToastContainer />
           <div className="flex justify-between items-center mb-6">
@@ -79,7 +85,6 @@ const Login = () => {
               signInWithEmailAndPassword(email, password)
               .then(()=>{
                 navigate(from, { replace: true })
-                toast('Login Successfull')
               })
               document.getElementById('exampleInputEmail2').value = "";
               document.getElementById('exampleInputPassword2').value = "";
