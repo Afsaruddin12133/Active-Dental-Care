@@ -13,6 +13,7 @@ const Login = () => {
   const [password,setPassword] = useState()
   const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+  console.log(loading)
 
   const handelresetpassword = async () =>{
     await sendPasswordResetEmail(email);
@@ -78,10 +79,8 @@ const Login = () => {
               signInWithEmailAndPassword(email, password)
               .then(()=>{
                 navigate(from, { replace: true })
-
                 toast('Login Successfull')
               })
-              
               document.getElementById('exampleInputEmail2').value = "";
               document.getElementById('exampleInputPassword2').value = "";
               }} className="
