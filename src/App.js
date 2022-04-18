@@ -15,6 +15,7 @@ function App() {
       <Nav/>
       <Routes>
         <Route path="/" element = {<Home/>}/>
+        <Route path="/home" element = {<Home/>}/>
         <Route path="/checkout" element = {<Checkout/>}/>
         <Route path="/registration" element = {<Singup/>}/>
         <Route path="/login" element = {<Login/>}/>

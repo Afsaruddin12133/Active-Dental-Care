@@ -1,9 +1,21 @@
 import { MenuIcon } from '@heroicons/react/solid';
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import auth from '../../Firebase.init/Firebase.init';
 import img from '../../Photos/logo/logoBlack.png';
 
+
 const Nav = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+    toast("Logout Succefull")
+  };
+  
   const activestyle=({ isActive }) => {
     return {
       display: "block",
@@ -16,12 +28,15 @@ const Nav = () => {
         <nav className='md:flex  bg-[#03045E] md:justify-between md:px-8 flex'>
            <div>
              <img src={img} alt="" className='cursor-pointer' />
+             <ToastContainer />
            </div>
            <div className='md:flex md:gap-8 md:p-6  md:block hidden'>
            <NavLink to = "/" style={activestyle}>Home</NavLink>
             <NavLink to = "/checkout" style={activestyle}>CheckOut</NavLink>
-            <NavLink to = "/registration" style={activestyle}>Sing Up</NavLink>
-            <NavLink to = "/login" style={activestyle}>Login</NavLink>
+           {user?"": <NavLink to = "/registration" style={activestyle}>Sing Up</NavLink>}
+          {  user
+          ? <button type="button" className=" text-white "onClick={logout} >Logout</button>
+          :<NavLink to = "/login" style={activestyle}>Login</NavLink>}
             <NavLink to = "/blog" style={activestyle}>Blogs</NavLink>
             <NavLink to = "/about" style={activestyle}>About Me</NavLink>
            </div>
