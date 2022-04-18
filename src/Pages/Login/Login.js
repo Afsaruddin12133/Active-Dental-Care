@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../Firebase.init/Firebase.init';
 import SocialMedia from '../../SheredPage/SocialMedia/SocialMedia';
 
 const Login = () => {
   let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const [email,setEmail] = useState()
   const [password,setPassword] = useState()
   const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+  const handelresetpassword = async () =>{
+    await sendPasswordResetEmail(email);
+    toast("Send Email")
+  }
     return (
         <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm p-10 mt-10 mb-12 m-auto">
             <h1 className='text-center text-3xl font-semibold mb-6'>Sing In</h1>
-        <form onSubmit={(e) => {
-              e.preventDefault();
-              signInWithEmailAndPassword(email, password)
-               toast('Login Successfull')
-               navigate('/home')
-              document.getElementById('exampleInputEmail2').value = "";
-              document.getElementById('exampleInputPassword2').value = "";
-              }}>
+        <form>
           <div className="form-group mb-6">
             <label for="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
             <input type="email" onBlur={(e)=>setEmail(e.target.value)} className="form-control
@@ -67,12 +68,23 @@ const Login = () => {
                 id="exampleCheck2" />
               <label className="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label>
             </div>
-            <a href="#!"
+            <button type='button' onClick={handelresetpassword}
               className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
-              password?</a>
+              password?</button>
           </div>
          
-          <button type="submit" className="
+          <button type="submit" onClick={(e) => {
+              e.preventDefault();
+              signInWithEmailAndPassword(email, password)
+              .then(()=>{
+                navigate(from, { replace: true })
+
+                toast('Login Successfull')
+              })
+              
+              document.getElementById('exampleInputEmail2').value = "";
+              document.getElementById('exampleInputPassword2').value = "";
+              }} className="
             w-full
             px-6
             py-2.5

@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Notfound from './Pages/Notfound/Notfound';
 import Singup from './Pages/Singup/Singup';
+import RequireAuth from './RequireAuth/RequireAuth';
 import Footer from './SheredPage/Footer/Footer';
 import Nav from './SheredPage/Navigation/Nav';
 
@@ -16,7 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element = {<Home/>}/>
         <Route path="/home" element = {<Home/>}/>
-        <Route path="/checkout" element = {<Checkout/>}/>
+         <Route path="/checkout" element = {
+         <RequireAuth>
+            <Checkout/>
+         </RequireAuth>
+        }/>
         <Route path="/registration" element = {<Singup/>}/>
         <Route path="/login" element = {<Login/>}/>
         <Route path="/blog" element = {<Blogs/>}/>
