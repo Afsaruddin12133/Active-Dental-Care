@@ -1,8 +1,13 @@
 import { CheckCircleIcon } from '@heroicons/react/solid';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Servics = ({data}) => {
   const {Name,Price,img,Description} = data;
+  let navigate = useNavigate();
+  const servicenavigate = (e) =>{
+    navigate("/checkout")
+  }
     return (
         <div className="mt-3">
         <div className="rounded-lg shadow-lg bg-white ">
@@ -18,7 +23,7 @@ const Servics = ({data}) => {
          </div>
             <h5 className='text-2xl mb-5 font-bold '>Price : ${Price}</h5>
            
-            <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Get Started</button>
+            <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" onClick={servicenavigate}>Get Started</button>
           </div>
         </div>
       </div>

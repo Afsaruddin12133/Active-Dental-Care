@@ -1,6 +1,10 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase.init/Firebase.init';
 
 const Checkout = () => {
+  const [user, loading, error] = useAuthState(auth);
+  console.log(user)
     return (
         <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm  mt-3 mb-3 m-auto">
               <h1 className='text-center text-3xl font-semibold mb-6'>Payment Details</h1>
@@ -23,7 +27,7 @@ const Checkout = () => {
               placeholder="Name" />
           </div>
           <div className="form-group mb-6">
-            <input type="email" className="form-control block
+            <input type="email" value={user?user.email :""} className="form-control block
               w-full
               px-3
               py-1.5
@@ -37,7 +41,7 @@ const Checkout = () => {
               ease-in-out
               m-0
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
-              placeholder="Email address" />
+              placeholder="Email address" readOnly />
           </div>
           <div className="form-group mb-6">
             <input type="phone" className="form-control block
